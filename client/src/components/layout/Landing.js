@@ -28,7 +28,7 @@ import PropTypes from 'prop-types';
         </div>
       </div>
     </section>
-    )
+    );
 }; 
 
 Landing.propTypes = {

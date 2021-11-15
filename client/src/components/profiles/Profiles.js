@@ -10,8 +10,12 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
           getProfiles();
       }, [getProfiles]);
 
-    return <Fragment>
-        { loading ? <Spinner /> : <Fragment>
+    return (
+    <Fragment>
+        { loading ? ( 
+            <Spinner />
+         ) : (
+             <Fragment>
             <h1 className="large text-primary">Developers</h1>
             <p className="lead">
                 <i className="fab fa-connectdevelop"></i> Browse an connect with 
@@ -22,10 +26,13 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                     profiles.map(profile => (
                         <ProfileItem key={profile._id} profile={profile} />
                     ))
-                ) : (<h4>No profiles found...</h4>)}
+                ) : (
+                    <h4>No profiles found...</h4>)}
             </div>
-        </Fragment>}
-    </Fragment>;
+        </Fragment>
+        )}
+    </Fragment> 
+    );
 };
 
 Profiles.propTypes = {

@@ -4,7 +4,8 @@ import {
     CLEAR_PROFILE, 
     UPDATE_PROFILE, 
     GET_PROFILES,
-    GET_REPOS
+    GET_REPOS,
+    NO_REPOS
 } from "../actions/types";
 
 const initialState = {
@@ -13,9 +14,9 @@ const initialState = {
     repos: [],
     loading: true,
     error: {}
-} 
-
-export default function(state = initialState, action) {
+}; 
+//export default function(state = initialState, action) {
+function profileReducer(state = initialState, action) {
     const { type, payload } = action;
 
     switch(type) {
@@ -36,13 +37,14 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 error: payload,
-                loading: false
+                loading: false,
+                profile: null
             };
         case CLEAR_PROFILE:
             return {
                 ...state,
                 profile: null,
-                reppos: [],
+                repos: [],
                 loading: false
             };
         case GET_REPOS:
@@ -50,8 +52,15 @@ export default function(state = initialState, action) {
                 ...state,
                 repos: payload,
                 loading: false
-            }
+            };
+        case NO_REPOS:
+            return {
+                ...state,
+                repos: []
+            };
         default:
             return state;
     }
 }
+
+export default profileReducer;

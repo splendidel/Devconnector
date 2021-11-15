@@ -12,7 +12,7 @@
     } from './types';
 
  // Get posts
-    export const getPosts= () => async dispatch => {
+    export const getPosts = () => async dispatch => {
         try{
             const res = await axios.get('/api/posts'); 
 
@@ -22,14 +22,14 @@
             });
         } catch (err) {
             dispatch({
-                type:POST_ERROR,
+                type: POST_ERROR,
                 payload: { msg: err.response.statusText, status: err.response.status }
             });
         }
     };
 
     //Add like
-    export const addLike= id => async dispatch => {
+    export const addLike = id => async dispatch => {
         try{
             const res = await axios.put(`/api/posts/like/${id}`); 
 
@@ -39,7 +39,7 @@
             });
         } catch (err) {
             dispatch({
-                type:POST_ERROR,
+                type: POST_ERROR,
                 payload: { msg: err.response.statusText, status: err.response.status }
             });
         }
@@ -65,7 +65,7 @@
     //Delete post
     export const deletePost= id => async dispatch => {
         try{
-            const res = await axios.delete(`/api/posts/unlike/${id}`); 
+             await axios.delete(`/api/posts/${id}`); 
 
             dispatch({
                 type: DELETE_POST,
@@ -75,7 +75,7 @@
             dispatch(setAlert('Post Removed', 'success'));
         } catch (err) {
             dispatch({
-                type:POST_ERROR,
+                type: POST_ERROR,
                 payload: { msg: err.response.statusText, status: err.response.status }
             });
         }
@@ -100,19 +100,19 @@
             dispatch(setAlert('Post Created', 'success'));
         } catch (err) {
             dispatch({
-                type:POST_ERROR,
+                type: POST_ERROR,
                 payload: { msg: err.response.statusText, status: err.response.status }
             });
         }
     };
 
-    // Get posts
+    // Get post
     export const getPost= id => async dispatch => {
         try{
             const res = await axios.get(`/api/posts/${id}`); 
 
             dispatch({
-                type: GET_POSTS,
+                type: GET_POST,
                 payload: res.data
             });
         } catch (err) {
@@ -151,7 +151,7 @@
      //Delete comment
      export const deleteComment = (postId, commentId ) => async dispatch => {
         try{
-            const res = await axios.post(`/api/posts/comment/${postId}/${commentId}`); 
+            await axios.delete(`/api/posts/comment/${postId}/${commentId}`); 
 
             dispatch({
                 type: REMOVE_COMMENT,

@@ -7,7 +7,7 @@ import { getGithubRepos } from '../../actions/profile'
 const ProfileGithub = ({ username, getGithubRepos, repos }) => {
     useEffect(() => {
         getGithubRepos(username);
-    }, [getGithubRepos(username)]);
+    }, [getGithubRepos, username]);
     
     return (
     <div className='profile-github'>
@@ -16,7 +16,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
             <Spinner /> 
             ): (
             repos.map(repo => (
-                <div key={repo._id} className='repo bg-white p-1 my-1'>
+                <div key={repo.id} className='repo bg-white p-1 my-1'>
                     <div>
                         <h4>
                             <a 
@@ -37,14 +37,13 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
                             <li className='badge badge-dark'>
                                 Watchers: {repo.watchers_count}
                             </li>
-                            <li className='badge badge-lightr'>
+                            <li className='badge badge-light'>
                                 Forks: {repo.forks_count}
                             </li>                            
                         </ul>
                     </div>
                 </div>
-            ))
-        )}
+            )))}
     </div>
     );
 };

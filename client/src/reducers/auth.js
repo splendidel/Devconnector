@@ -15,8 +15,8 @@ isAuthenticated: null,
 loading: true,
 user: null
 };
-
-export default function(state = initialState, action) {
+//export default function(state = initialState, action) {
+function authReducer(state = initialState, action) {
     const { type, payload } = action; 
 
     switch (type) {
@@ -37,18 +37,21 @@ export default function(state = initialState, action) {
                 loading: false
             };
             case REGISTER_FAIL:
+            case ACCOUNT_DELETED:
             case AUTH_ERROR: 
             case LOGIN_FAIL:
             case LOGOUT:
-            case ACCOUNT_DELETED:
                 localStorage.removeItem('token');
                 return {
                     ...state,
                     token: null, 
                     isAuthenticated: false,
-                    loading: false
+                    loading: false,
+                    user: null
                 };
                 default: 
                   return state;
     }
 }
+
+export default authReducer; 

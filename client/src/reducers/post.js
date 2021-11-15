@@ -15,8 +15,8 @@ const initialState = {
     loading: true,
     error: {}
 };
-
-export default function(state =initialState, action) {
+//export default function(state =initialState, action) {
+ function postReducer(state =initialState, action) {
     const { type, payload } = action;
 
     switch(type) {
@@ -31,7 +31,7 @@ export default function(state =initialState, action) {
                 ...state,
                 post: payload,
                 loading: false
-            }
+            };
         case ADD_POST:
             return {
                 ...state,
@@ -41,7 +41,7 @@ export default function(state =initialState, action) {
         case DELETE_POST:
             return {
                 ...state,
-                posts: state.posts.filter(post => post._id !== payload),
+                posts: state.posts.filter((post) => post._id !== payload),
                 loading: false
             };
         case POST_ERROR: 
@@ -63,14 +63,14 @@ export default function(state =initialState, action) {
                 ...state,
                 post: { ...state.post, comments: payload },
                 loading: false
-            }
+            };
         case REMOVE_COMMENT:
             return {
                 ...state,
                 post: {
                     ...state.post,
                     comments: state.post.comments.filter(
-                        comment => comment._id !== payload
+                        (comment) => comment._id !== payload
                     )
                 },
                 loading: false
@@ -79,3 +79,5 @@ export default function(state =initialState, action) {
         return state;
         }
 }
+
+export default postReducer;
